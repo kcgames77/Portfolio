@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Survivors | Khalid Chilipachi</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Khalid Chilipachi</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+
+        <!-- DROPDOWN -->
+        <li class="dropdown">
+          <a href="projects.html" class="dropdown-toggle">Projects</a>
+          <ul class="dropdown-menu">
+            <li><a href="spider-man.html">Spider-Man Traversal Mechanic</a></li>
+            <li><a href="the-survivors.html">The Survivors</a></li>
+            <li><a href="replica.html">Replica</a></li>
+            <li><a href="centipede.html">Centipede</a></li>
+          </ul>
+        </li>
+
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- PROJECT DETAIL -->
+  <section class="project-detail">
+    <div class="container">
+      <h1>The Survivors</h1>
+      <p class="subtitle">2D Story-Based Metroidvania | GameMaker Studio 2</p>
+
+      <div class="project-meta">
+        <span>Made with: <strong>GameMaker</strong></span>
+        <span>Genre: <strong>Action Adventure</strong></span>
+        <span>Status: <strong>Released(Demo)</strong></span>
+      </div>
+
+      <div class="project-image-full">
+        <img src="WebAssets/TheSurvivors.png" alt="Screenshot of The Survivors" />
+      </div>
+
+      <div class="project-description">
+        <p>
+          <em>The Survivors</em> is a 2D story-based Metroidvania that blends deliberate combat, exploration, and narrative depth. 
+          It’s built to feel like a AAA experience in a 2D world. A story told through responsive gameplay, world exploring and environmental tension.
+        </p><br>
+
+        <p>
+          I handled every aspect of gameplay programming from the combat and AI to the camera system, UI, resource management, and traversal logic. 
+          Each system interacts dynamically: stamina governs how long players can use certain mechanics like crouching and blocking while the Focus mechanic slows perception during key moments, 
+          and cinematic sequences use shader-based black bars and transitions to guide pacing and communicate with the player.
+        </p><br>
+
+        <p>
+          My biggest technical challenge was making dozens of interconnected systems work together seamlessly. 
+          Combat, input handling, the pause menu, saving/loading, and cinematic triggers all needed to operate independently but still communicate when states changed. 
+          Through multiple iterations and rewrites, I built a structure that could handle these transitions cleanly without performance dips or unpredictable behavior.
+        </p><br>
+
+		<p>
+		  One of the visual effects I developed for my game was a “Poisoned” screen shader. When the player 
+		  takes damage from enemies with a venom attack, this shader activates to distort and tint the scene, creating 
+		  a feeling of disorientation. The vertex and fragment shaders below work together to simulate both 
+		  wave-like motion and subtle chromatic aberration.
+		</p><br>
+
+		<pre><code class="language-glsl">
+		// Vertex Shader (poison.vsh)
+		// Basic pass-through vertex transform
+		attribute vec3 in_Position;
+		attribute vec2 in_TextureCoord;
+		varying vec2 v_vTexcoord;
+		varying vec4 v_vColour;
+
+		void main() {
+			vec4 object_space_pos = vec4(in_Position.x, in_Position.y, in_Position.z, 1.0);
+			gl_Position = gm_Matrices[MATRIX_WORLD_VIEW_PROJECTION] * object_space_pos;
+			v_vTexcoord = in_TextureCoord;
+			v_vColour = vec4(1.0); // full color
+		}
+		</code></pre><br>
+
+		<pre><code class="language-glsl">
+		// Fragment Shader (poison.fsh)
+		// Applies distortion and color shift to mimic a poisoned visual effect
+		varying vec2 v_vTexcoord;
+		varying vec4 v_vColour;
+		uniform float u_time;
+		uniform float u_intensity;
+
+		void main() {
+			vec2 uv = v_vTexcoord;
+			
+			// Sinusoidal horizontal distortion (like a toxin pulse)
+			float wave = sin(uv.y * 10.0 + u_time * 2.0) * 0.01 * u_intensity;
+			uv.x += wave;
+			
+			// chromatic aberration
+			float aberration = 0.005 * u_intensity;
+			vec3 color;
+			color.r = texture2D(gm_BaseTexture, uv + vec2(aberration, 0.0)).r;
+			color.g = texture2D(gm_BaseTexture, uv).g;
+			color.b = texture2D(gm_BaseTexture, uv - vec2(aberration, 0.0)).b;
+			
+			gl_FragColor = vec4(color, 1.0);
+		}
+		</code></pre><br>
+
+		<p>
+		  The effect’s intensity scales dynamically using the <code>u_intensity</code> uniform, which ties directly to 
+		  the player’s status variables. As the poison timer ticks down, the distortion fades, restoring clarity and 
+		  grounding the player back into the world. The result is a feedback system that’s visual, reactive, and 
+		  grounded in gameplay logic.
+		</p><br>
+
+
+	  <p>
+		One of my favorite design choices was the “claustrophobia” mechanic — when the player crawls 
+		through tight spaces with low stamina, the environment subtly reacts: the screen darkens, 
+		sound dampens, and the player’s breathing becomes audible. It’s a small system, 
+		but it captures the psychological tension I wanted players to feel in moments of exhaustion and confinement.
+	  </p><br>
+        <p>
+          One of my favorite design choices was the “claustrophobia” mechanic. When the player crawls through tight spaces with low stamina, 
+          the environment subtly reacts: the screen darkens, sound dampens, and the player’s breathing becomes audible. 
+          It’s a small system, but it captures the psychological tension I wanted players to feel in moments of exhaustion and confinement.
+        </p><br>
+
+        <p>
+          Every effect, from the Focus shader to the boss combats was programmed from scratch. 
+          Cutscenes were built using in-engine timing and input locks rather than pre-rendered videos, so the world always feels alive. 
+          Character animations, music, and sound effects were contributed by freelancers, but every system behind them,every collision, transition, and behavior was written by me.
+        </p><br>
+
+        <p>
+          The Survivors taught me more than any of my Computer Science classes could about the marriage between design and engineering. 
+          I learned that “feel” is engineered through timing, feedback, and constraint. And that code is only as good as the story it helps tell. 
+          This project became my foundation for understanding how gameplay systems can drive emotional storytelling as well help me decide the career I am currently pursuing.
+        </p>
+      </div>
+
+	  <div class="video-container">
+		<iframe
+			width="560"
+			height="315"
+			src="https://www.youtube.com/embed/1NJW-GwaBhg?si=zrl62VXMTBzPjsDt"
+			title="YouTube video player"
+			frameborder="0"
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+			referrerpolicy="strict-origin-when-cross-origin"
+			allowfullscreen>
+		</iframe>
+	  </div>
+
+      <div class="project-links">
+        <a href="https://github.com/kcgames77/The-Survivors" target="_blank" class="btn btn-outline">
+          <i class="fa-brands fa-github"></i> View Repository
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Khalid Chilipachi. All rights reserved.</p>
+      <div class="social-links">
+        <a href="https://github.com/kcgames77" target="_blank" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/khalid-c" target="_blank" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://kc77.itch.io/" target="_blank" aria-label="Itch.io">
+          <i class="fab fa-itch-io"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
