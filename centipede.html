@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Centipede | Khalid Chilipachi</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<script>
+  const dropdown = document.querySelector('.dropdown');
+  const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+
+  let hideTimeout;
+
+  dropdown.addEventListener('mouseenter', () => {
+    clearTimeout(hideTimeout);
+    dropdownMenu.style.display = 'block';
+  });
+
+  dropdown.addEventListener('mouseleave', () => {
+    hideTimeout = setTimeout(() => {
+      dropdownMenu.style.display = 'none';
+    }, 3000); // 3 seconds
+  });
+
+  dropdownMenu.addEventListener('mouseenter', () => {
+    clearTimeout(hideTimeout);
+  });
+
+  dropdownMenu.addEventListener('mouseleave', () => {
+    hideTimeout = setTimeout(() => {
+      dropdownMenu.style.display = 'none';
+    }, 3000);
+  });
+</script>
+
+
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Khalid Chilipachi</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+
+        <!-- DROPDOWN -->
+        <li class="dropdown">
+          <a href="projects.html" class="dropdown-toggle">Projects</a>
+          <ul class="dropdown-menu">
+            <li><a href="spider-man.html">Spider-Man Traversal Mechanic</a></li>
+            <li><a href="the-survivors.html">The Survivors</a></li>
+            <li><a href="replica.html">Replica</a></li>
+            <li><a href="centipede.html">Centipede</a></li>
+          </ul>
+        </li>
+
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- PROJECT DETAIL -->
+  <section class="project-detail">
+    <div class="container">
+      <h1>Centipede</h1>
+      <p class="subtitle">Arcade-style shooter made entirely in Java</p>
+
+	<div class="project-gallery">
+	  <a href="#img1"><img src="WebAssets/Centipede.png" alt="Centipede Gameplay"></a>
+	  <a href="#img2"><img src="WebAssets/Centipede2.png" alt="Centipede Gameplay"></a>
+	</div>
+
+	<!-- Lightbox images -->
+	<div class="lightbox" id="img1">
+	  <a href="#_" class="close"></a>
+	  <img src="WebAssets/Centipede.png" alt="Centipede Screenshot 1">
+	  <a href="#img2" class="next">&#10095;</a>
+	</div>
+
+	<div class="lightbox" id="img2">
+	  <a href="#_" class="close"></a>
+	  <img src="WebAssets/Centipede2.png" alt="Centipede Screenshot 2">
+	  <a href="#img1" class="prev">&#10094;</a>
+	</div>
+
+
+	<div class="lightbox" id="img2">
+	  <a href="#_" class="close"></a>
+	  <img src="WebAssets/Centipede2.png" alt="Centipede Screenshot 2">
+	  <a href="#img1" class="prev">&#10094;</a>
+	</div>
+      <div class="project-description">
+        <p>
+          A modern recreation of the classic <em>Centipede</em> arcade game, developed from scratch in Java for my Advanced Data Structures course, where I also served as a teaching assistant.
+        </p>
+        <p>
+          I implemented custom classes for player movement, segmented centipede logic, and projectile handling. Each segment updates its position dynamically, following the head with collision checks against mushrooms and player bullets.
+        </p>
+        <p>
+          The game features object-oriented structure with reusable entities, smooth recoil mechanics, and frame-based timing for accurate shooting speed and enemy movement.
+        </p>
+      </div>
+
+      <div class="project-links">
+        <a href="https://github.com/kcgames77/Centipede" target="_blank" class="btn btn-outline">
+          <i class="fa-brands fa-github"></i> View Source
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Khalid Chilipachi. All rights reserved.</p>
+      <div class="social-links">
+        <a href="https://github.com/kcgames77" target="_blank" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/khalid-c" target="_blank" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://kc77.itch.io/" target="_blank" aria-label="Itch.io">
+          <i class="fab fa-itch-io"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

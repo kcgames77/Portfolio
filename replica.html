@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Replica | Khalid Chilipachi</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<script>
+  const dropdown = document.querySelector('.dropdown');
+  const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+
+  let hideTimeout;
+
+  dropdown.addEventListener('mouseenter', () => {
+    clearTimeout(hideTimeout);
+    dropdownMenu.style.display = 'block';
+  });
+
+  dropdown.addEventListener('mouseleave', () => {
+    hideTimeout = setTimeout(() => {
+      dropdownMenu.style.display = 'none';
+    }, 3000); // 3 seconds
+  });
+
+  dropdownMenu.addEventListener('mouseenter', () => {
+    clearTimeout(hideTimeout);
+  });
+
+  dropdownMenu.addEventListener('mouseleave', () => {
+    hideTimeout = setTimeout(() => {
+      dropdownMenu.style.display = 'none';
+    }, 3000);
+  });
+</script>
+
+
+<body>
+  <!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="logo">Khalid Chilipachi</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+
+      <!-- DROPDOWN -->
+      <li class="dropdown">
+        <a href="projects.html" class="dropdown-toggle">Projects</a>
+        <ul class="dropdown-menu">
+		  <li><a href="spider-man.html">Spider-Man Traversal Mechanic</a></li>
+          <li><a href="the-survivors.html">The Survivors</a></li>
+          <li><a href="replica.html">Replica</a></li>
+          <li><a href="centipede.html">Centipede</a></li>
+
+        </ul>
+      </li>
+
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+  <section class="project-detail">
+    <div class="container">
+      <h1>Replica</h1>
+      <p class="subtitle">GameMaker Studio 2 | Puzzle-Platformer</p>
+
+      <div class="project-meta">
+        <span>Made with: <strong>GameMaker</strong></span>
+        <span>Genre: <strong>Puzzle / Platformer</strong></span>
+        <span>Status: <strong>Released</strong></span>
+      </div>
+
+      <div class="project-image-full">
+        <img src="WebAssets/Replica.png" alt="Screenshot of Replica" />
+      </div>
+
+	<div class="project-description">
+	  <p>
+		Replica is a 2D puzzle platformer made in four days for the 2025 GMTK Game Jam under the theme <em>Loop</em>. 
+		I was responsible for designing and programming the entire echo system, which lets players cooperate with past versions of themselves after dying or running out of time. 
+		Up to five echoes can exist at once, each repeating the exact sequence of inputs from the previous runs and interacting with the current player.
+	  </p>
+	  
+	  <p><br>
+	  
+		The first version of the system recorded player positions each frame, but that approach fell apart when the player left the ground. 
+		Gravity and vertical movement caused desyncs, so I switched to an input-based recording model that logged every button press and stored it in small JSON files. 
+		Each iteration reloaded its own file and replayed inputs through the movement system, keeping the behavior consistent while staying lightweight.
+	  </p></br>
+	  <p>
+		Echoes were designed to collide with the player to create platforms or tools that supported future runs. 
+		This led to puzzles that forced players to think ahead using one version to press switches or stack themselves to reach high ledges. 
+		I didn’t include fail-safes for paradoxes on purpose; the point was to make players consider how their decisions ripple across timelines. 
+		The game stayed stable and efficient, with each recording only a few kilobytes in size.
+	  </p>
+	  <p>
+		My priority during the jam was to get the mechanic working smoothly and make it feel intuitive. 
+		Even with limited time, Replica became a great study in how player input, and memory systems can work together to create interesting level based puzzles.
+	  </p>
+	  
+	<div class="project-gallery">
+	  <a href="#img1"><img src="WebAssets/Replica_GP1.png" alt="Replica Screenshot 1"></a>
+	  <a href="#img2"><img src="WebAssets/Replica_GP2.png" alt="Replica Screenshot 2"></a>
+	</div>
+
+	<!-- Lightbox images -->
+	<div class="lightbox" id="img1">
+	  <a href="#_" class="close"></a>
+	  <img src="WebAssets/Replica_GP1.png" alt="Replica Screenshot 1">
+	  <a href="#img2" class="next">&#10095;</a>
+	</div>
+
+	<div class="lightbox" id="img2">
+	  <a href="#_" class="close"></a>
+	  <img src="WebAssets/Replica_GP2.png" alt="Replica Screenshot 2">
+	  <a href="#img1" class="prev">&#10094;</a>
+	</div>
+
+	</div>
+
+
+      <div class="project-tags">
+        <span class="tag">GameMaker</span>
+        <span class="tag">GML</span>
+        <span class="tag">2D</span>
+
+
+      </div>
+
+      <div class="project-links">
+        <a href="https://kc77.itch.io/replica" class="btn btn-primary" target="_blank">
+          Play on itch.io
+        </a>
+        <a href="projects.html" class="btn btn-secondary">
+          Back to Projects
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Khalid Chilipachi. All rights reserved.</p>
+      <div class="social-links">
+        <a href="https://github.com/kcgames77" target="_blank" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/khalid-c" target="_blank" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://kc77.itch.io/" target="_blank" aria-label="Itch.io">
+          <i class="fab fa-itch-io"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

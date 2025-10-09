@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Khalid Chilipachi</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<script>
+  const dropdown = document.querySelector('.dropdown');
+  const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+
+  let hideTimeout;
+
+  dropdown.addEventListener('mouseenter', () => {
+    clearTimeout(hideTimeout);
+    dropdownMenu.style.display = 'block';
+  });
+
+  dropdown.addEventListener('mouseleave', () => {
+    hideTimeout = setTimeout(() => {
+      dropdownMenu.style.display = 'none';
+    }, 3000); // 3 seconds
+  });
+
+  dropdownMenu.addEventListener('mouseenter', () => {
+    clearTimeout(hideTimeout);
+  });
+
+  dropdownMenu.addEventListener('mouseleave', () => {
+    hideTimeout = setTimeout(() => {
+      dropdownMenu.style.display = 'none';
+    }, 3000);
+  });
+</script>
+
+
+<body>
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="logo">Khalid Chilipachi</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+
+      <!-- DROPDOWN -->
+      <li class="dropdown">
+        <a href="projects.html" class="dropdown-toggle">Projects</a>
+        <ul class="dropdown-menu">
+		  <li><a href="spider-man.html">Spider-Man Traversal Mechanic</a></li>
+          <li><a href="survivors.html">The Survivors</a></li>
+          <li><a href="replica.html">Replica</a></li>
+          <li><a href="centipede.html">Centipede</a></li>
+
+        </ul>
+      </li>
+
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+  <!-- ABOUT SECTION -->
+  <section class="about-section">
+    <div class="container">
+      <div class="about-content">
+        <div class="about-text">
+          <h1>About Me</h1>
+          <p>
+            Hello there! I’m a gameplay programmer and developer with a focus on systems that feel responsive, fluid, and fun. 
+            My background blends Computer Science fundamentals with hands-on experience designing 
+            and coding full gameplay loops from prototype to the polished build.
+          </p>
+          <p>
+            I’ve built action platformers, traversal systems, AI behavior trees and finite state machines, as well as physics-driven mechanics using 
+            GameMaker Studio 2 and Unreal Engine 5. My goal is always the same: to 
+            make interactions feel so smooth players forget they’re just inputs and math.
+          </p>
+          <p>
+				A part from making and playing video games, I love cooking and trying out new dishes. I have a knack of experiencing new flavors and
+				learning different recipes. I also enjoy meeting new people as well as exploring different cultures.
+				During my pasttime, I love discussing and reading philosophy books.
+          </p>
+          <div class="cta-buttons" style="margin-top: 2rem;">
+          </div>
+        </div>
+
+		<div class="about-image">
+		  <div class="image-frame">
+			<img src="\Game Files\WebAssets\profilepic.jpeg" alt="Khalid Chilipachi" class="profile-pic">
+		  </div>
+		</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+<section class="skills-section">
+  <div class="container">
+    <h2 class="section-title">Skills & Technologies</h2>
+
+    <div class="skills-wrapper">
+      <div class="skills-category">
+        <h3><i class="fa-solid fa-cubes"></i> Game Engines</h3>
+        <p>Unreal Engine 5 (C++ / Blueprints), GameMaker Studio 2</p>
+      </div>
+
+      <div class="skills-category">
+        <h3><i class="fa-solid fa-code"></i> Programming Languages</h3>
+        <p>C++, Lua, GML, Java, Python</p>
+      </div>
+
+      <div class="skills-category">
+        <h3><i class="fa-solid fa-gamepad"></i> Gameplay & Systems</h3>
+        <p>Combat / Combo Systems, Physics, AI & Pathfinding, Camera & Animation Systems</p>
+      </div>
+
+      <div class="skills-category">
+        <h3><i class="fa-solid fa-tools"></i> Tools & Pipelines</h3>
+        <p>Git, Perforce, Jira, Visual Studio Code, Teams</p>
+      </div>
+
+      <div class="skills-category">
+        <h3><i class="fa-solid fa-brain"></i> Development Strengths</h3>
+        <p>Gameplay Programming, Systems Design, Optimization, QA Workflows, Technical Writing and Documentation</p>
+      </div>
+
+      <div class="skills-category">
+        <h3><i class="fa-solid fa-users"></i> Soft Skills</h3>
+        <p>Collaboration, Adaptability, Attention to Detail, Multitasking, Problem Solving</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- CONTACT -->
+  <section class="featured" id="contact" style="padding: 4rem 0;">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+      <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+        <p style="color: var(--gray); margin-bottom: 2rem; font-size: 1.1rem;">
+          Always open to collaborations, gameplay programming roles, or feedback from other developers.
+        </p>
+        <div class="cta-buttons">
+          <a href="mailto:khalidchilipachi@gmail.com" class="btn btn-secondary">Email</a>
+          <a href="https://linkedin.com/in/khalid-c" class="btn btn-secondary" target="_blank">LinkedIn</a>		  
+          <a href="https://github.com/kcgames77" class="btn btn-secondary" target="_blank">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Khalid Chilipachi. All rights reserved.</p>
+      <div class="social-links">
+        <a href="https://github.com/kcgames77" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/khalid-c" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://kc77.itch.io/" target="_blank" aria-label="Itch.io"><i class="fab fa-itch-io"></i></a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

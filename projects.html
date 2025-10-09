@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects - Khalid Chilipachi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<script>
+  const dropdown = document.querySelector('.dropdown');
+  const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+
+  let hideTimeout;
+
+  dropdown.addEventListener('mouseenter', () => {
+    clearTimeout(hideTimeout);
+    dropdownMenu.style.display = 'block';
+  });
+
+  dropdown.addEventListener('mouseleave', () => {
+    hideTimeout = setTimeout(() => {
+      dropdownMenu.style.display = 'none';
+    }, 3000); // 3 seconds
+  });
+
+  dropdownMenu.addEventListener('mouseenter', () => {
+    clearTimeout(hideTimeout);
+  });
+
+  dropdownMenu.addEventListener('mouseleave', () => {
+    hideTimeout = setTimeout(() => {
+      dropdownMenu.style.display = 'none';
+    }, 3000);
+  });
+</script>
+
+
+<body>
+  <!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="logo">Khalid Chilipachi</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+
+      <!-- DROPDOWN -->
+      <li class="dropdown">
+        <a href="projects.html" class="dropdown-toggle">Projects</a>
+        <ul class="dropdown-menu">
+		  <li><a href="spider-man.html">Spider-Man Traversal Mechanic</a></li>
+          <li><a href="the-survivors.html">The Survivors</a></li>
+          <li><a href="replica.html">Replica</a></li>
+          <li><a href="centipede.html">Centipede</a></li>
+
+        </ul>
+      </li>
+
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+  <!-- PROJECTS SECTION -->
+  <section class="projects-section">
+    <div class="container">
+      <h1 class="section-title">My Projects</h1>
+
+      <div class="projects-grid">
+
+        <!-- Spider-Man Traversal -->
+		<a href="spider-man.html" class="project-link">
+        <article class="project-card wip">
+          <div class="project-image">
+            <img src="WebAssets/coming-soon.png" alt="Spider-Man Traversal Mechanic" loading="lazy">
+          </div>
+          <div class="project-info">
+            <h3>Spider-Man Traversal Mechanic (In Development)</h3>
+            <p>Building a physics-based web-swinging system in Unreal Engine 5 to learn more on the 3Cs in 3D space.</p>
+            <div class="tags">
+              <span class="tag">Unreal 5</span>
+              <span class="tag">C++</span>
+              <span class="tag">Blueprints</span>
+              <span class="tag">In Progress</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- The Survivors -->
+		<a href="the-survivors.html" class="project-link">
+        <article class="project-card">
+          <div class="project-image">
+            <img src="WebAssets/TheSurvivors.png" alt="The Survivors Screenshot" loading="lazy">
+          </div>
+          <div class="project-info">
+            <h3>The Survivors</h3>
+            <p>A story-driven 2D metroidvania built to mirror a full game development pipeline from early prototype to final polish.</p>
+            <div class="tags">
+              <span class="tag">GameMaker Studio 2</span>
+              <span class="tag">GML</span>
+              <span class="tag">2D</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Replica -->
+		<a href="replica.html" class="project-link">
+        <article class="project-card">
+          <div class="project-image">
+            <img src="WebAssets/Replica.png" alt="Replica Screenshot" loading="lazy">
+          </div>
+          <div class="project-info">
+            <h3>Replica</h3>
+            <p>A puzzle-platformer game made in 4 days for the 2025 GMTK Game jam. The theme of the jam was <i>Loop.</p>
+            <div class="tags">
+              <span class="tag">GameMaker Studio 2</span>
+              <span class="tag">GML</span>
+              <span class="tag">2D</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Centipede -->
+		<a href="centipede.html" class="project-link">
+        <article class="project-card">
+          <div class="project-image">
+            <img src="WebAssets/Centipede.png" alt="Centipede Screenshot" loading="lazy">
+          </div>
+          <div class="project-info">
+            <h3>Centipede</h3>
+            <p>A recreation of the classic Centipede arcade game, built entirely in Java with Swing.</p>
+            <div class="tags">
+              <span class="tag">Java</span>
+              <span class="tag">2D</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Khalid Chilipachi. All rights reserved.</p>
+      <div class="social-links">
+        <a href="https://github.com/kcgames77" target="_blank" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/khalid-c" target="_blank" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://kc77.itch.io/" target="_blank" aria-label="Itch.io">
+          <i class="fab fa-itch-io"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
