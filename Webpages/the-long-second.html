@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Long Second | Khalid Chilipachi</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<script>
+  const dropdown = document.querySelector('.dropdown');
+  const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+
+  let hideTimeout;
+
+  dropdown.addEventListener('mouseenter', () => {
+    clearTimeout(hideTimeout);
+    dropdownMenu.style.display = 'block';
+  });
+
+  dropdown.addEventListener('mouseleave', () => {
+    hideTimeout = setTimeout(() => {
+      dropdownMenu.style.display = 'none';
+    }, 200); // 0.2 seconds
+  });
+
+  dropdownMenu.addEventListener('mouseenter', () => {
+    clearTimeout(hideTimeout);
+  });
+
+  dropdownMenu.addEventListener('mouseleave', () => {
+    hideTimeout = setTimeout(() => {
+      dropdownMenu.style.display = 'none';
+    }, 200);
+  });
+</script>
+
+
+<body>
+  <!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="logo">Khalid Chilipachi</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+
+      <!-- DROPDOWN -->
+      <li class="dropdown">
+        <a href="projects.html" class="dropdown-toggle">Projects</a>
+        <ul class="dropdown-menu">
+          <li><a href="the-long-second.html">The Long Second</a></li>
+          <li><a href="the-survivors.html">The Survivors</a></li>
+          <li><a href="replica.html">Replica</a></li>
+          <li><a href="centipede.html">Centipede</a></li>
+
+        </ul>
+      </li>
+
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+  <section class="project-detail">
+    <div class="container">
+      <h1>The Long Second</h1>
+      <p class="subtitle">GameMaker Studio 2 | Time-Manipulation Puzzle Platformer</p>
+
+      <div class="project-meta">
+        <span>Made with: <strong>GameMaker</strong></span>
+        <span>Genre: <strong>Puzzle / Platformer</strong></span>
+        <span>Status: <strong>Released</strong></span>
+      </div>
+
+      <div class="project-image-full">
+        <img src="../WebAssets/TLS.png" alt="Title screen of The Long Second" />
+      </div>
+
+    <div class="project-description">
+      <p>
+        The Long Second is a 2D time-manipulation puzzle platformer made solo in four days for the 2026 GMTK Game Jam
+        under the theme <i>Countdown</i>. In the game, you have ten seconds to escape a set of chambers designed to test your skills
+        with four ways to bend time around you: rewind, slow, pause and fast-forward. Hwever, the player does not get affected 
+        by the time changes. You always move at 1x speed, and gravity never stops, so freezing the world will never carry you across a gap.
+      </p>
+
+      <p><br>
+        I had built a time system for a jam once before. <a href="replica.html">Replica</a> recorded player inputs and replayed them through the
+        movement system, which worked because it only ever had to reproduce one object: the player. This time the whole
+        level had to be able to bend to the time abilities given. All obstacles and platforms needed to be manipulatable.
+		So I went the other way and gave every dynamic object a ring buffer of its own state, written each frame and read back during a rewind.
+		Objects declare what matters about them in their Create event and the component does the rest.
+      </p>
+
+      <p><br>
+        The rule that made it hold together was learning not to store anything I could recalculate. My first pass
+        snapshotted everything, including values derived from other values, and rewinding produced objects that were
+        subtly wrong like a mace whose angle no longer matched its rotation count, a pendulum that drifted off its arc, etc.
+        Once I switched to snapshotting only the true inputs to each object's motion and deriving the rest after the
+        restore, every one of those desyncs disappeared at the same time.
+      </p>
+
+      <p><br>
+        GML only allows one parent per object, which was a problem when a moving platform needed to be both solid and
+        rewindable. Rather than fight the hierarchy I wrote the time system as a set of functions any object can opt
+        into. The <code>time_init</code>, <code>time_can_act</code>, <code>time_scale</code>, <code>time_step</code> functions
+        we written so a platform inherits from the collision parent and still gets full time behaviour. Every obstacle I added
+        afterwards plugged into it without the system changing shape, which is the clearest sign I have had that an
+        architecture decision was the right one.
+      </p>
+
+      <p><br>
+        The jam version shipped with an hour to spare and the feedback was consistent: players used freeze for
+        everything and barely touched the other three powers, and sadly, they were right. Freezing time stopped the countdown as
+        well as the world, so it cost nothing, and most of my chambers were built around threats rather than distances.
+        In the post-jam version, I rebuilt every chamber around the three things freeze genuinely cannot do such as
+        crossing a gap, restore something already gone, and create something that has not happened yet. I also
+        rebalanced the costs so freeze became a scalpel rather than a default. Reading that feedback was super beneficial
+        as it helped me re-iterate the game to the polished state it has become today.
+      </p>
+
+      <div class="project-gallery">
+        <a href="#img1"><img src="../WebAssets/TLS_GP1.png" alt="The Long Second Screenshot 1"></a>
+        <a href="#img2"><img src="../WebAssets/TLS_GP2.png" alt="The Long Second Screenshot 2"></a>
+      </div>
+
+      <!-- Lightbox images -->
+      <div class="lightbox" id="img1">
+        <a href="#_" class="close"></a>
+        <img src="../WebAssets/TLS_GP1.png" alt="The Long Second Screenshot 1">
+        <a href="#img2" class="next">&#10095;</a>
+      </div>
+
+      <div class="lightbox" id="img2">
+        <a href="#_" class="close"></a>
+        <img src="../WebAssets/TLS_GP2.png" alt="The Long Second Screenshot 2">
+        <a href="#img1" class="prev">&#10094;</a>
+      </div>
+
+    </div>
+
+
+      <div class="project-tags">
+        <span class="tag">GameMaker</span>
+        <span class="tag">GML</span>
+        <span class="tag">GLSL</span>
+        <span class="tag">2D</span>
+
+
+      </div>
+
+      <div class="project-links">
+        <a href="https://kc77.itch.io/the-long-second" class="btn btn-primary" target="_blank">
+			<i class="fa-brands fa-itch-io"></i> Play on itch.io
+        </a>
+        </a>
+		<a href="https://github.com/kcgames77/The-Long-Second" class="btn btn-primary" target="_blank">
+          <i class="fa-brands fa-github"></i> View Repository
+        </a>
+        <a href="projects.html" class="btn btn-secondary">
+          Back to Projects
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Khalid Chilipachi. All rights reserved.</p>
+      <div class="social-links">
+        <a href="https://github.com/kcgames77" target="_blank" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/khalid-c" target="_blank" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://kc77.itch.io/" target="_blank" aria-label="Itch.io">
+          <i class="fab fa-itch-io"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
